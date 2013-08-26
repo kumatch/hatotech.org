@@ -1,0 +1,26 @@
+{
+  "name": "hatotech.org",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+
+  "devDependencies": {
+    "grunt": "~0.4",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-jade": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-cssmin": "*",
+
+    "connect": "*",
+    "jade": "*",
+    "markdown": "*",
+    "sprintf": "*",
+    "async": "0.2",
+    "moment": "2.1",
+    "paranoic": "0.1"
+  }
+}
