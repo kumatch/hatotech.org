@@ -15,7 +15,7 @@ block content
 
       each diary in diaries
         div.diary-frame
-          h4= diary.date
+          h4(id="d_#{diary.date}")= diary.date
           div!= diary.html
 
       include _before_after.jade
