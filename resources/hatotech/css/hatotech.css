@@ -26,9 +26,19 @@ body {
 }
 
 .nav-hatotech {
-   background-color: #fff;
-   border-bottom: 3px solid #ddd;
+    background-color: #fff;
+    border-bottom: 3px solid #ddd;
 }
+
+.nav-hatotech .navbar-toggle {
+    border-color: #888;
+}
+
+.nav-hatotech .navbar-toggle .icon-bar {
+    background-color: #777;
+}
+
+
 
 
 
