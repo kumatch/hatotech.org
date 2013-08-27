@@ -14,8 +14,8 @@ block content
       include _before_after.jade
 
       each diary in diaries
-        div.diary-frame
-          h4(id="d_#{diary.date}")= diary.date
+        div.diary-frame(id="d_#{diary.date}")
+          h4= diary.date
           div!= diary.html
 
       include _before_after.jade
