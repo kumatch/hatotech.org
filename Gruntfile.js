@@ -5,6 +5,7 @@ module.exports = function(grunt) {
     var container = require('./container');
 
     grunt.initConfig({
+        realm: "hatotech",
         pkg: pkg,
 
         jade: {
@@ -31,7 +32,7 @@ module.exports = function(grunt) {
             },
             hatotech: {
                 src: [ "resources/hatotech/js/*.js" ],
-                dest: "web/assets/js/hatotech.js"
+                dest: "web/assets/js/<%= realm %>.js"
             }
         },
 
@@ -42,7 +43,7 @@ module.exports = function(grunt) {
             },
             hatotech: {
                 src: "<%= concat.hatotech.dest %>",
-                dest: "web/assets/js/hatotech.min.js"
+                dest: "web/assets/js/<%= realm %>.min.js"
             }
         },
 
