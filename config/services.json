@@ -1,0 +1,46 @@
+{
+  "parameters": {
+      "path": {
+          "root": "",
+          "lib": "<%= path.root%>/lib",
+
+          "web": "<%= path.root %>/web",
+          "web_diary": "<%= path.web %>/diary",
+
+          "template": "<%= path.root %>/templates",
+          "diary": "<%= path.root %>/_diary"
+      }
+  },
+
+  "services": {
+      "diary_finder": {
+          "factory": {
+              "module": "<%= path.lib %>/diary/finder",
+              "arguments": [
+                  "<%= path.diary %>"
+              ]
+          }
+      },
+
+      "diary_navigator": {
+          "factory": {
+              "module": "<%= path.lib %>/diary/navigator",
+              "arguments": [
+                  "@diary_finder"
+              ]
+          }
+      },
+
+      "diary_printer": {
+          "factory": {
+              "module": "<%= path.lib %>/diary/printer",
+              "arguments": [
+                  "@diary_navigator",
+                  "@diary_finder",
+                  "<%= path.template %>",
+                  "<%= path.web_diary %>"
+              ]
+          }
+      }
+  }
+}

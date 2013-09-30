@@ -2,7 +2,10 @@
 module.exports = function(grunt) {
     var pkg = grunt.file.readJSON('package.json');
     var async = require('async');
-    var container = require('./container');
+    var Paranoic = require('paranoic');
+
+    var container = new Paranoic(__dirname + "/config/services.json");
+    container.setParameter("path.root", __dirname);
 
     grunt.initConfig({
         realm: "hatotech",
@@ -66,15 +69,15 @@ module.exports = function(grunt) {
         if (!year)  year  = new Date().getFullYear();
         if (!month) month = new Date().getMonth() + 1;
 
-        var printer = container.get('diary.printer');
+        var printer = container.get('diary_printer');
         var done = this.async();
 
         printer(Number(year), Number(month), done);
     });
 
     grunt.registerTask('diary-all', 'Markdown で書かれたすべての日記を HTML へ出力して書き出す', function () {
-        var navigator = container.get('diary.navigator');
-        var printer = container.get('diary.printer');
+        var navigator = container.get('diary_navigator');
+        var printer = container.get('diary_printer');
 
         var done = this.async();
 
@@ -92,7 +95,6 @@ module.exports = function(grunt) {
             }, done);
         });
     });
-
 
 
     Object.keys(pkg.devDependencies).forEach(function (devDependency) {
