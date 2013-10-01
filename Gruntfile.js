@@ -103,8 +103,13 @@ module.exports = function(grunt) {
         var monthlies = Monthly.find();
         var done = this.async();
 
-        Printer.printNavigation(monthlies, done);
-        Printer.printIndex(monthlies, done);
+        Printer.printNavigation(monthlies, function (err) {
+            if (err) {
+                done(err);
+            } else {
+                Printer.printIndex(monthlies, done);
+            }
+        });
     });
 
 
