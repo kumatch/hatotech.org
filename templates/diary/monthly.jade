@@ -1,0 +1,24 @@
+extends ../layout
+
+block content-header
+  div#diary-header
+    div.container
+      h2 Diary #{monthly.formatYearMonth('-')}
+
+block content
+
+  div.row
+
+    div.col-md-10
+
+      <%= before_after_link %>
+
+      each diary in diaries
+        div.diary-frame(id="d_#{diary.date}")
+          h4= diary.date
+          div!= diary.html
+
+      <%= before_after_link %>
+
+    div.col-md-2
+      <%= monthlies_link %>

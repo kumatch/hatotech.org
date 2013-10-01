@@ -1,0 +1,14 @@
+div.row.diary-before-after-navigation
+  div.col-xs-6
+    if (monthly.before)
+      a.pull-right(href="/diary/#{monthly.before.formatYearMonth()}.html")
+        i.icon-angle-left
+        span= monthly.before.formatYearMonth('-')
+      span &nbsp;
+
+  div.col-xs-6
+    if (monthly.after)
+      a.pull-left(href="/diary/#{monthly.after.formatYearMonth()}.html")
+        span= monthly.after.formatYearMonth('-')
+        i.icon-angle-right
+      span &nbsp;

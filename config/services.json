@@ -13,6 +13,15 @@
   },
 
   "services": {
+      "diary_monthly": {
+          "factory": {
+              "module": "<%= path.lib %>/diary/monthly",
+              "arguments": [
+                  "<%= path.diary %>"
+              ]
+          }
+      },
+
       "diary_finder": {
           "factory": {
               "module": "<%= path.lib %>/diary/finder",
@@ -22,21 +31,10 @@
           }
       },
 
-      "diary_navigator": {
-          "factory": {
-              "module": "<%= path.lib %>/diary/navigator",
-              "arguments": [
-                  "@diary_finder"
-              ]
-          }
-      },
-
       "diary_printer": {
           "factory": {
               "module": "<%= path.lib %>/diary/printer",
               "arguments": [
-                  "@diary_navigator",
-                  "@diary_finder",
                   "<%= path.template %>",
                   "<%= path.web_diary %>"
               ]

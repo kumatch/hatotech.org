@@ -65,36 +65,49 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('diary', 'Markdown で書かれた日記を HTML へ出力して書き出す', function (year, month) {
-        if (!year)  year  = new Date().getFullYear();
-        if (!month) month = new Date().getMonth() + 1;
+    grunt.registerTask('diary', 'Markdown で書かれた日記を HTML へ出力化', function (year, month) {
+        year = year   ? Number(year)  : new Date().getFullYear();
+        month = month ? Number(month) : new Date().getMonth() + 1;
 
-        var printer = container.get('diary_printer');
+        var Monthly = container.get('diary_monthly');
+        var Printer = container.get('diary_printer');
+
+        var monthly = Monthly.get(year, month);
+
+        if (!monthly) {
+            grunt.fail.fatal("undefined monthly diary " + year + "-" + month);
+        }
+
+        grunt.task.run([ 'diary-after' ]);
+
         var done = this.async();
-
-        printer(Number(year), Number(month), done);
+        Printer.printMonthlyDiary(monthly, done);
     });
 
-    grunt.registerTask('diary-all', 'Markdown で書かれたすべての日記を HTML へ出力して書き出す', function () {
-        var navigator = container.get('diary_navigator');
-        var printer = container.get('diary_printer');
+    grunt.registerTask('diary-all', 'Markdown で書かれたすべての日記を HTML へ出力化', function () {
+        var Monthly = container.get('diary_monthly');
+        var Printer = container.get('diary_printer');
 
+        var monthlies = Monthly.find();
         var done = this.async();
 
-        navigator(function (err, navigation) {
-            if (err) {
-                done(err);
-                return;
-            }
-
-            async.each(navigation.all, function (navi, next) {
-                var year  = Number(navi.year);
-                var month = Number(navi.month);
-
-                printer(year, month, next);
-            }, done);
-        });
+        grunt.task.run([ 'diary-after' ]);
+        async.each(monthlies, Printer.printMonthlyDiary, done);
     });
+
+
+    grunt.registerTask('diary-after', '日記 HTML 作成の後処理', function () {
+        var Monthly = container.get('diary_monthly');
+        var Printer = container.get('diary_printer');
+
+        var monthlies = Monthly.find();
+        var done = this.async();
+
+        Printer.printNavigation(monthlies, done);
+        Printer.printIndex(monthlies, done);
+    });
+
+
 
 
     Object.keys(pkg.devDependencies).forEach(function (devDependency) {

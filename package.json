@@ -19,6 +19,7 @@
     "jade": "*",
     "markdown": "*",
     "sprintf": "*",
+    "lodash": "*",
     "async": "0.2",
     "moment": "2.1",
     "paranoic": "0.2"

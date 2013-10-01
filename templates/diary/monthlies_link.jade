@@ -1,0 +1,8 @@
+each monthlies,year in yearsMonthlies
+  div
+    h3= year
+
+  ul.nav.nav-pills.nav-stacked
+    each monthly in monthlies
+      li
+        a.monthly-link(href="/diary/#{monthly.formatYearMonth()}.html") #{monthly.formatYearMonth('-')}

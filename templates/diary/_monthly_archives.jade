@@ -1,6 +1,0 @@
-div(ng-repeat="year_info in navigation.years | orderBy:'year':true")
-  h3 {{year_info.year}}
-
-  ul.nav.nav-pills.nav-stacked
-    li(ng-repeat="month_info in year_info.monthly | orderBy:'month':true")
-      a.monthly-link(href="/diary/{{month_info.year}}{{month_info.month|format: '%02d'}}.html") {{month_info.year}}-{{month_info.month|format: "%02d"}}
